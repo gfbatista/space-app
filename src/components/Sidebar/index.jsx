@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ItemNav from "./ItemNav";
 
 const StyledList = styled.ul`
   list-style: none;
@@ -12,9 +13,13 @@ const Sidebar = () => {
     <aside>
       <nav>
         <StyledList>
-          <li>
-            <a href>Início</a>
-          </li>
+          <ItemNav
+            activeIcon="/icons/home-ativo.png"
+            inactiveIcon="/icons/home-inativo.png"
+            active
+          >
+            Início
+          </ItemNav>
         </StyledList>
       </nav>
     </aside>
