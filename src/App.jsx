@@ -2,6 +2,8 @@ import styled from "styled-components";
 import GlobalStyles from "./components/GlobalStyles";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import Banner from "./components/Banner";
+import bannerBackground from "./assets/banner.png";
 
 const GradientBackground = styled.div`
   background: linear-gradient(
@@ -20,6 +22,10 @@ function App() {
       <GlobalStyles />
       <Header />
       <Sidebar />
+      <Banner
+        texto="A galeria mais completa de fotos do espaço!"
+        backgroundImage={bannerBackground}
+      />
     </GradientBackground>
   );
 }
