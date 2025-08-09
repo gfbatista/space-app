@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Banner from "./components/Banner";
 import Gallery from "./components/Gallery";
+import ModalZoom from "./components/ModalZoom";
 import bannerBackground from "./assets/banner.png";
 
 import { useState } from "react";
@@ -39,6 +40,7 @@ const MainContainer = styled.main`
 
 const App = () => {
   const [galleryPhotos, setGalleryPhotos] = useState(photos);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   return (
     <GradientBackground>
       <GlobalStyles />
@@ -51,10 +53,14 @@ const App = () => {
               texto="A galeria mais completa de fotos do espaço!"
               backgroundImage={bannerBackground}
             />
-            <Gallery photos={galleryPhotos} />
+            <Gallery
+              onSelectedPhoto={(photo) => setSelectedPhoto(photo)}
+              photos={galleryPhotos}
+            />
           </MainGallery>
         </MainContainer>
       </AppContainer>
+      <ModalZoom photo={selectedPhoto} />
     </GradientBackground>
   );
 };
