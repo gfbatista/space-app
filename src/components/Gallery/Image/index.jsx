@@ -46,14 +46,14 @@ const Image = ({ photo, expand = false, onRequestedZoom }) => {
         <Footer>
           <h4>{photo.font}</h4>
           <ButtonIcon>
-            <img src="/icones/favorito.png" alt="Icone de favorito" />
+            <img src="/icons/favorito.png" alt="Icone de favorito" />
           </ButtonIcon>
           {!expand && (
             <ButtonIcon
               aria-hidden={expand}
               onClick={() => onRequestedZoom(photo)}
             >
-              <img src="/icones/expandir.png" alt="Icone de expandir" />
+              <img src="/icons/expandir.png" alt="Icone de expandir" />
             </ButtonIcon>
           )}
         </Footer>

@@ -39,7 +39,7 @@ const ModalZoom = ({ photo, onClose }) => {
             <Image photo={photo} expand={true} />
             <form method="dialog">
               <ButtonIcon formMethod="dialog">
-                <img src="/icones/fechar.png" alt="Icone de fechar" />
+                <img src="/icons/fechar.png" alt="Icone de fechar" />
               </ButtonIcon>
             </form>
           </StyledDialog>
