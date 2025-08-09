@@ -60,7 +60,10 @@ const App = () => {
           </MainGallery>
         </MainContainer>
       </AppContainer>
-      <ModalZoom photo={selectedPhoto} />
+      <ModalZoom
+        photo={selectedPhoto}
+        onClose={() => setSelectedPhoto(null)}
+      />
     </GradientBackground>
   );
 };
