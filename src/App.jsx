@@ -7,7 +7,7 @@ import Gallery from "./components/Gallery";
 import ModalZoom from "./components/ModalZoom";
 import bannerBackground from "./assets/banner.png";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import photos from "./photos.json";
 
 const GradientBackground = styled.div`
@@ -40,12 +40,46 @@ const MainContainer = styled.main`
 
 const App = () => {
   const [galleryPhotos, setGalleryPhotos] = useState(photos);
+  const [filter, setFilter] = useState("");
+  const [tag, setTag] = useState(0);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+
+  useEffect(() => {
+    const filteredPhotos = photos.filter((photo) => {
+      const filteredByTag = !tag || photo.tagId === tag;
+      const filteredByTitle =
+        !filter || photo.title.toLowerCase().includes(filter.toLowerCase());
+      return filteredByTag && filteredByTitle;
+    });
+    setGalleryPhotos(filteredPhotos);
+  }, [filter, tag]);
+
+  const toggleFavorite = (photo) => {
+    if (photo.id === selectedPhoto?.id) {
+      setSelectedPhoto({
+        ...selectedPhoto,
+        favorite: !selectedPhoto.favorite,
+      });
+    }
+
+    setGalleryPhotos(
+      galleryPhotos.map((photoGallery) => {
+        return {
+          ...photoGallery,
+          favorite:
+            photoGallery.id === photo.id
+              ? !photo.favorite
+              : photoGallery.favorite,
+        };
+      })
+    );
+  };
+
   return (
     <GradientBackground>
       <GlobalStyles />
       <AppContainer>
-        <Header />
+        <Header filter={filter} setFilter={setFilter} />
         <MainContainer>
           <Sidebar />
           <MainGallery>
@@ -55,7 +89,9 @@ const App = () => {
             />
             <Gallery
               onSelectedPhoto={(photo) => setSelectedPhoto(photo)}
+              toggleFavorite={toggleFavorite}
               photos={galleryPhotos}
+              setTag={setTag}
             />
           </MainGallery>
         </MainContainer>
@@ -63,6 +99,7 @@ const App = () => {
       <ModalZoom
         photo={selectedPhoto}
         onClose={() => setSelectedPhoto(null)}
+        toggleFavorite={toggleFavorite}
       />
     </GradientBackground>
   );

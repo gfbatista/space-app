@@ -29,10 +29,16 @@ const GlassIcon = styled.img`
   height: 38px;
 `;
 
-const TextField = (props) => {
+const TextField = ({ setFilter }) => {
   return (
     <StyledContainer>
-      <StyledTextField placeholder="O que você procura?" {...props} />
+      <StyledTextField
+        onChange={(evento) => {
+          setFilter(evento.target.value);
+        }}
+        type="text"
+        placeholder="O que você procura?"
+      />
       <GlassIcon src={search} alt="ícone de lupa" />
     </StyledContainer>
   );
